@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>信息提交</title>
+    <style>
+        .container {max-width: 600px; margin: 50px auto; padding: 20px}
+        .form-group {margin-bottom: 15px}
+        label {display: block; margin-bottom: 5px}
+        input, button {width: 100%; padding: 10px}
+        button {background: #007bff; color: white; border: none}
+        .alert {margin: 20px 0; padding: 15px}
+        .alert-success {background: #d4edda; color: #155724}
+        .alert-error {background: #f8d7da; color: #721c24}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>信息提交</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert">
+                    {% for category, message in messages %}
+                        <div class="alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/submit">
+            <div class="form-group">
+                <label>姓名：</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>电子邮箱：</label>
+                <input type="email" name="email" required>
+            </div>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+</body>
+</html>
